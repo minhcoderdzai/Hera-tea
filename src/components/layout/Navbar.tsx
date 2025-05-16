@@ -19,11 +19,13 @@ import {
   DropdownMenuItem, 
   DropdownMenuSeparator
 } from "@/components/ui/dropdown-menu";
+import CartDrawer from "../cart/CartDrawer";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const { totalItems } = useCart();
   const [isOpen, setIsOpen] = useState(false);
+  const [showCartDrawer, setShowCartDrawer] = useState(false);
   
   return (
     <header className="bg-background border-b border-border sticky top-0 z-40 w-full">
@@ -101,6 +103,9 @@ const Navbar = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="bg-background border-border">
                   <DropdownMenuItem asChild>
+                    <Link to="/account" className="w-full">Bảng điều khiển</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
                     <Link to="/account/profile" className="w-full">Tài khoản</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
@@ -123,30 +128,36 @@ const Navbar = () => {
               </Link>
             )}
             
-            <Link to="/cart" className="relative">
-              <Button variant="outline" size="icon">
-                <ShoppingCart className="h-5 w-5" />
-                {totalItems > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-tea-dark text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    {totalItems}
-                  </span>
-                )}
-              </Button>
-            </Link>
+            <Button 
+              variant="outline" 
+              size="icon"
+              onClick={() => setShowCartDrawer(true)}
+              className="relative"
+            >
+              <ShoppingCart className="h-5 w-5" />
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-2 bg-tea-dark text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {totalItems}
+                </span>
+              )}
+            </Button>
           </div>
           
           {/* Mobile Menu Button */}
           <div className="flex md:hidden items-center space-x-3">
-            <Link to="/cart" className="relative">
-              <Button variant="outline" size="icon">
-                <ShoppingCart className="h-5 w-5" />
-                {totalItems > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-tea-dark text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    {totalItems}
-                  </span>
-                )}
-              </Button>
-            </Link>
+            <Button
+              variant="outline" 
+              size="icon"
+              onClick={() => setShowCartDrawer(true)}
+              className="relative"
+            >
+              <ShoppingCart className="h-5 w-5" />
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-2 bg-tea-dark text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {totalItems}
+                </span>
+              )}
+            </Button>
             <Button 
               variant="ghost" 
               size="icon"
@@ -197,6 +208,13 @@ const Navbar = () => {
                 <div className="px-3 py-2 text-base font-medium">
                   {user.name}
                 </div>
+                <Link 
+                  to="/account" 
+                  className="block px-3 py-2 rounded-md text-base font-medium hover:bg-accent"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Bảng điều khiển
+                </Link>
                 <Link 
                   to="/account/profile" 
                   className="block px-3 py-2 rounded-md text-base font-medium hover:bg-accent"
@@ -251,6 +269,12 @@ const Navbar = () => {
           </div>
         </div>
       )}
+      
+      {/* Cart Drawer */}
+      <CartDrawer 
+        open={showCartDrawer} 
+        onClose={() => setShowCartDrawer(false)} 
+      />
     </header>
   );
 };

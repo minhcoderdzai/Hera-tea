@@ -17,6 +17,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import CheckoutSuccessPage from "./pages/CheckoutSuccessPage";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
+import DashboardPage from "./pages/account/DashboardPage";
 import ProfilePage from "./pages/account/ProfilePage";
 import OrdersPage from "./pages/account/OrdersPage";
 import AffiliatePage from "./pages/account/AffiliatePage";
@@ -49,6 +50,7 @@ const App = () => (
               <Route path="/auth/register" element={<RegisterPage />} />
               
               {/* Account Routes */}
+              <Route path="/account" element={<DashboardPage />} />
               <Route path="/account/profile" element={<ProfilePage />} />
               <Route path="/account/orders" element={<OrdersPage />} />
               <Route path="/account/affiliate" element={<AffiliatePage />} />

@@ -63,11 +63,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       };
       
       if (email.includes("affiliate")) {
-        mockUser.role = "affiliate" as const;
+        mockUser.role = "affiliate";
       }
       
       if (email.includes("admin")) {
-        mockUser.role = "admin" as const;
+        mockUser.role = "admin";
       }
       
       // Save user to localStorage
