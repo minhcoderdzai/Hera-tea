@@ -23,7 +23,9 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
   const { cartItems, totalItems, totalPrice, updateQuantity, removeFromCart } = useCart();
 
   return (
-    <Sheet open={open} onClose={onClose}>
+    <Sheet open={open} onOpenChange={(isOpen) => {
+      if (!isOpen) onClose();
+    }}>
       <SheetContent side="right" className="w-full sm:max-w-md">
         <SheetHeader className="flex items-center justify-between">
           <SheetTitle className="text-xl font-serif">
