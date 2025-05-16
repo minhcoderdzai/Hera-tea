@@ -9,6 +9,20 @@ import {
   CreditCard 
 } from "lucide-react";
 import { toast } from "@/components/ui/sonner";
+import { 
+  BarChart, 
+  Bar, 
+  LineChart, 
+  Line, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  ResponsiveContainer, 
+  PieChart, 
+  Pie, 
+  Cell 
+} from "recharts";
 
 // Mock data for affiliate statistics
 const mockAffiliateData = {
@@ -20,6 +34,33 @@ const mockAffiliateData = {
   clicksCount: 243,
   conversionRate: 6.17,
 };
+
+// Mock data for charts
+const salesData = [
+  { name: 'T1', value: 320000 },
+  { name: 'T2', value: 450000 },
+  { name: 'T3', value: 780000 },
+  { name: 'T4', value: 950000 },
+  { name: 'T5', value: 1250000 },
+  { name: 'T6', value: 1500000 },
+];
+
+const conversionData = [
+  { name: 'T1', rate: 3.2 },
+  { name: 'T2', rate: 4.5 },
+  { name: 'T3', rate: 5.1 },
+  { name: 'T4', rate: 4.7 },
+  { name: 'T5', rate: 6.2 },
+  { name: 'T6', rate: 6.7 },
+];
+
+const productsSoldData = [
+  { name: 'Thanh sắc', value: 8 },
+  { name: 'An nguyệt', value: 10 },
+  { name: 'Thái mộc', value: 7 },
+];
+
+const COLORS = ['#3b82f6', '#10b981', '#6366f1'];
 
 const AffiliateStats = () => {
   const copyAffiliateCode = () => {
@@ -70,6 +111,122 @@ const AffiliateStats = () => {
             </div>
             <div className="text-2xl font-medium">
               {mockAffiliateData.conversionRate}%
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Performance Charts */}
+      <div className="bg-white rounded-lg border border-border p-6">
+        <h2 className="text-xl font-serif font-medium text-tea-dark mb-6">
+          Biểu đồ hiệu suất
+        </h2>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div>
+            <h3 className="text-lg font-medium mb-4">Doanh thu theo tháng</h3>
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={salesData}
+                  margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis 
+                    tickFormatter={(value) => 
+                      new Intl.NumberFormat('vi-VN', {
+                        notation: 'compact',
+                        compactDisplay: 'short',
+                        maximumFractionDigits: 1,
+                      }).format(value)
+                    }
+                  />
+                  <Tooltip 
+                    formatter={(value) => 
+                      new Intl.NumberFormat('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND',
+                      }).format(Number(value))
+                    }
+                  />
+                  <Bar dataKey="value" fill="#7c3aed" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+          
+          <div>
+            <h3 className="text-lg font-medium mb-4">Tỷ lệ chuyển đổi theo tháng</h3>
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                  data={conversionData}
+                  margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip formatter={(value) => `${value}%`} />
+                  <Line type="monotone" dataKey="rate" stroke="#10b981" strokeWidth={2} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+          
+          <div>
+            <h3 className="text-lg font-medium mb-4">Sản phẩm bán chạy</h3>
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={productsSoldData}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                    outerRadius={80}
+                    fill="#8884d8"
+                    dataKey="value"
+                  >
+                    {productsSoldData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip formatter={(value) => `${value} đơn`} />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+          
+          <div>
+            <h3 className="text-lg font-medium mb-4">Thống kê chi tiết</h3>
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <span className="text-gray-600">Số lượt xem</span>
+                <span className="font-medium">1,243</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-gray-600">Số lần click</span>
+                <span className="font-medium">{mockAffiliateData.clicksCount}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-gray-600">Đơn hàng thành công</span>
+                <span className="font-medium">{mockAffiliateData.ordersCount}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-gray-600">Doanh số</span>
+                <span className="font-medium">
+                  {new Intl.NumberFormat("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  }).format(mockAffiliateData.earningsTotal / 0.35)}
+                </span>
+              </div>
+              <div className="flex justify-between items-center pt-2 border-t border-border">
+                <span className="text-gray-600 font-medium">Tỷ lệ chuyển đổi</span>
+                <span className="font-medium text-tea">{mockAffiliateData.conversionRate}%</span>
+              </div>
             </div>
           </div>
         </div>
