@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -15,7 +16,7 @@ interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   login: (email: string, password: string) => void;
-  register: (name: string, email: string, password: string, referralCode?: string) => void;
+  register: (name: string, email: string, password: string, role: "customer" | "affiliate", referralCode?: string) => void;
   logout: () => void;
 }
 
@@ -105,7 +106,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }, 1000);
   };
 
-  const register = (name: string, email: string, password: string, referralCode?: string) => {
+  const register = (name: string, email: string, password: string, role: "customer" | "affiliate" = "customer", referralCode?: string) => {
     // This would normally be an API call
     // For demo purposes, we're mocking the registration
     
@@ -117,9 +118,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         id: `user-${Date.now()}`,
         name,
         email,
-        role: "customer",
-        points: 0,
-        referralCode: `USER${Math.floor(100000 + Math.random() * 900000)}`,
+        role,
+        points: role === "affiliate" ? 100 : 0,
+        referralCode: role === "affiliate" ? 
+          `AFF${Math.floor(100000 + Math.random() * 900000)}` : 
+          `USER${Math.floor(100000 + Math.random() * 900000)}`,
         referrer: referralCode
       };
       
