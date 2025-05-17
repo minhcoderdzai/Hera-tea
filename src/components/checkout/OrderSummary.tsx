@@ -106,9 +106,9 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
         )}
         
         <div className="border-t border-border pt-4 mt-4">
-          <div className="flex justify-between text-lg font-medium">
-            <span>Tổng cộng</span>
-            <span className="text-tea-dark">
+          <div className="flex justify-between items-center text-lg font-medium flex-wrap">
+            <span className="mr-2 whitespace-nowrap">Tổng cộng</span>
+            <span className="text-tea-dark whitespace-nowrap">
               {new Intl.NumberFormat("vi-VN", {
                 style: "currency",
                 currency: "VND",

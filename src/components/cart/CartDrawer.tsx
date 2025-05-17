@@ -79,8 +79,8 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
         <SheetFooter className="border-t border-border pt-4 flex flex-col mt-auto">
           {cartItems.length > 0 && (
             <div className="flex justify-between mb-4 w-full px-1">
-              <span className="text-base font-medium">Tổng cộng:</span>
-              <span className="text-base font-medium text-tea-dark">
+              <span className="text-base font-medium whitespace-nowrap mr-2">Tổng cộng:</span>
+              <span className="text-base font-medium text-tea-dark whitespace-nowrap">
                 {new Intl.NumberFormat("vi-VN", {
                   style: "currency",
                   currency: "VND",
