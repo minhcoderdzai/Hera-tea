@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -69,7 +68,7 @@ const mockOrders = [
 const OrdersPage = () => {
   const { user, logout } = useAuth();
   const [searchTerm, setSearchTerm] = useState("");
-  const [statusFilter, setStatusFilter] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all"); // Changed from empty string to "all"
   
   if (!user) {
     return (
@@ -98,7 +97,7 @@ const OrdersPage = () => {
       order.id.toLowerCase().includes(searchTerm.toLowerCase());
     
     const matchesStatus =
-      statusFilter === "" || order.status === statusFilter;
+      statusFilter === "all" || order.status === statusFilter; // Changed from empty string to "all"
     
     return matchesSearch && matchesStatus;
   });
@@ -189,7 +188,7 @@ const OrdersPage = () => {
                     <SelectValue placeholder="Trạng thái" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Tất cả</SelectItem>
+                    <SelectItem value="all">Tất cả</SelectItem> {/* Changed from empty string to "all" */}
                     <SelectItem value="Chờ xác nhận">Chờ xác nhận</SelectItem>
                     <SelectItem value="Đang xử lý">Đang xử lý</SelectItem>
                     <SelectItem value="Đang giao hàng">Đang giao hàng</SelectItem>
