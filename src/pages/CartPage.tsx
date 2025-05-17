@@ -65,8 +65,8 @@ const CartPage = () => {
                 
                 <div className="mt-6">
                   <Link to="/products">
-                    <Button variant="outline" className="flex items-center">
-                      <ChevronLeft className="h-4 w-4 mr-2" />
+                    <Button variant="outline" className="flex items-center h-9 text-sm">
+                      <ChevronLeft className="h-4 w-4 mr-1" />
                       Tiếp tục mua sắm
                     </Button>
                   </Link>
