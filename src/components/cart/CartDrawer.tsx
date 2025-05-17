@@ -2,8 +2,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, X } from "lucide-react";
-import { useCart, CartItem as CartItemType } from "@/context/CartContext";
+import { ShoppingCart, X, Trash2 } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 import {
   Sheet,
   SheetClose,
@@ -20,7 +20,7 @@ interface CartDrawerProps {
 }
 
 const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
-  const { cartItems, totalItems, totalPrice, updateQuantity, removeFromCart } = useCart();
+  const { cartItems, totalItems, totalPrice, updateQuantity, removeFromCart, clearCart } = useCart();
 
   return (
     <Sheet open={open} onOpenChange={(isOpen) => {
@@ -31,16 +31,28 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
           <SheetTitle className="text-xl font-serif">
             Giỏ hàng ({totalItems})
           </SheetTitle>
-          <SheetClose asChild>
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={onClose}
-              className="h-8 w-8"
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          </SheetClose>
+          <div className="flex items-center gap-2">
+            {cartItems.length > 0 && (
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={clearCart}
+                className="text-sm text-muted-foreground hover:text-destructive"
+              >
+                Xóa tất cả
+              </Button>
+            )}
+            <SheetClose asChild>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                onClick={onClose}
+                className="h-8 w-8"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </SheetClose>
+          </div>
         </SheetHeader>
         
         <div className="py-6 overflow-y-auto flex-1">

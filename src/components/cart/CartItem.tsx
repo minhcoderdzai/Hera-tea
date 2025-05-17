@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Trash, Plus, Minus } from "lucide-react";
+import { Trash2, Plus, Minus } from "lucide-react";
 import { CartItem as CartItemType } from "@/context/CartContext";
 
 interface CartItemProps {
@@ -19,6 +19,12 @@ const CartItem: React.FC<CartItemProps> = ({
 }) => {
   const { product, quantity } = item;
   
+  const handleRemove = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onRemove(product.id);
+  };
+  
   if (compact) {
     return (
       <div className="flex gap-3 py-3 border-b border-border">
@@ -32,8 +38,8 @@ const CartItem: React.FC<CartItemProps> = ({
         </div>
         
         {/* Product Info */}
-        <div className="flex-grow">
-          <h3 className="text-sm font-medium text-tea-dark">{product.name}</h3>
+        <div className="flex-grow min-w-0">
+          <h3 className="text-sm font-medium text-tea-dark truncate">{product.name}</h3>
           <p className="text-sm text-gray-600">
             {new Intl.NumberFormat("vi-VN", {
               style: "currency",
@@ -74,9 +80,9 @@ const CartItem: React.FC<CartItemProps> = ({
               size="icon"
               variant="ghost"
               className="h-6 w-6 text-destructive"
-              onClick={() => onRemove(product.id)}
+              onClick={handleRemove}
             >
-              <Trash className="h-3 w-3" />
+              <Trash2 className="h-3 w-3" />
             </Button>
           </div>
         </div>
@@ -127,9 +133,9 @@ const CartItem: React.FC<CartItemProps> = ({
               size="icon"
               variant="ghost"
               className="h-8 w-8 text-destructive"
-              onClick={() => onRemove(product.id)}
+              onClick={handleRemove}
             >
-              <Trash className="h-4 w-4" />
+              <Trash2 className="h-4 w-4" />
             </Button>
           </div>
           

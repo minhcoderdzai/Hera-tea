@@ -115,6 +115,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const clearCart = () => {
     setCartItems([]);
+    toast.info("Đã xóa tất cả sản phẩm khỏi giỏ hàng");
   };
 
   const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
