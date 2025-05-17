@@ -12,20 +12,7 @@ const ProductShowcase = () => {
   const [showCartDrawer, setShowCartDrawer] = useState(false);
   
   // Get the first 3 products for showcase
-  const showcaseProducts = [
-    {
-      ...products[0],
-      image: "/lovable-uploads/16dbbcf6-68c7-483a-a8ea-c626c2f10587.png"
-    },
-    {
-      ...products[1],
-      image: "/lovable-uploads/c40cd8f7-f61b-4ae7-aa29-f96088e994f6.png"
-    },
-    {
-      ...products[2],
-      image: "/lovable-uploads/c214670f-0757-4cdc-9433-689081e09f20.png"
-    }
-  ];
+  const showcaseProducts = products.slice(0, 3);
 
   const handleAddToCart = (product, e) => {
     e.preventDefault();

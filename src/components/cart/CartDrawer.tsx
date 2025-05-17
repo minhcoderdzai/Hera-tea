@@ -26,7 +26,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
     <Sheet open={open} onOpenChange={(isOpen) => {
       if (!isOpen) onClose();
     }}>
-      <SheetContent side="right" className="w-full sm:max-w-md">
+      <SheetContent side="right" className="w-full sm:max-w-md flex flex-col">
         <SheetHeader className="flex items-center justify-between">
           <SheetTitle className="text-xl font-serif">
             Giỏ hàng ({totalItems})
@@ -43,7 +43,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
           </SheetClose>
         </SheetHeader>
         
-        <div className="py-6 overflow-y-auto max-h-[calc(100vh-180px)]">
+        <div className="py-6 overflow-y-auto flex-1">
           {cartItems.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-40 text-center">
               <ShoppingCart className="h-12 w-12 text-gray-400 mb-4" />
@@ -64,7 +64,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
           )}
         </div>
         
-        <SheetFooter className="border-t border-border pt-4 flex flex-col">
+        <SheetFooter className="border-t border-border pt-4 flex flex-col mt-auto">
           {cartItems.length > 0 && (
             <div className="flex justify-between mb-4 w-full">
               <span className="text-lg font-medium">Tổng cộng:</span>

@@ -32,7 +32,7 @@ const Hero = () => {
               </Button>
             </Link>
             <Link to="/about">
-              <Button variant="outline" className="border-white text-white hover:bg-white/20">
+              <Button variant="outline" className="border-white text-white hover:bg-white/20 bg-white/10">
                 Tìm hiểu thêm
               </Button>
             </Link>
