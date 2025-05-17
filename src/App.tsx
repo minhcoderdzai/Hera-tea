@@ -21,6 +21,8 @@ import DashboardPage from "./pages/account/DashboardPage";
 import ProfilePage from "./pages/account/ProfilePage";
 import OrdersPage from "./pages/account/OrdersPage";
 import AffiliatePage from "./pages/account/AffiliatePage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +41,10 @@ const App = () => (
               <Route path="/products" element={<ProductsPage />} />
               <Route path="/products/category/:category" element={<ProductsPage />} />
               <Route path="/products/:id" element={<ProductDetailPage />} />
+              
+              {/* Static Pages */}
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
               
               {/* Cart & Checkout Routes */}
               <Route path="/cart" element={<CartPage />} />

@@ -8,7 +8,6 @@ import {
   Menu,
   X,
   Search,
-  ChevronDown,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
@@ -26,6 +25,7 @@ const Navbar = () => {
   const { totalItems } = useCart();
   const [isOpen, setIsOpen] = useState(false);
   const [showCartDrawer, setShowCartDrawer] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   
   return (
     <header className="bg-background border-b border-border sticky top-0 z-40 w-full">
@@ -50,43 +50,20 @@ const Navbar = () => {
             <Link to="/" className="nav-link">
               Trang chủ
             </Link>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button className="nav-link flex items-center">
-                  Sản phẩm <ChevronDown className="ml-1 h-4 w-4" />
-                </button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-background border-border">
-                <DropdownMenuItem asChild>
-                  <Link to="/products" className="w-full">
-                    Tất cả sản phẩm
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link to="/products/category/thanh-sac" className="w-full">
-                    Thanh sắc mộc trà
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/products/category/an-nguyet" className="w-full">
-                    An nguyệt mộc trà
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/products/category/thai-moc" className="w-full">
-                    Thái mộc mộc trà
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <Link to="/products" className="nav-link">
+              Sản phẩm
+            </Link>
             <Link to="/about" className="nav-link">
               Về chúng tôi
             </Link>
             <Link to="/contact" className="nav-link">
               Liên hệ
             </Link>
-            <Button variant="outline" size="icon">
+            <Button 
+              variant="outline" 
+              size="icon"
+              onClick={() => setShowSearch(!showSearch)}
+            >
               <Search className="h-5 w-5" />
             </Button>
           </nav>
@@ -168,6 +145,15 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      
+      {/* Product Search */}
+      {showSearch && (
+        <div className="border-t border-border py-3 bg-background">
+          <div className="container mx-auto px-4">
+            <ProductSearch onClose={() => setShowSearch(false)} />
+          </div>
+        </div>
+      )}
       
       {/* Mobile Menu */}
       {isOpen && (
