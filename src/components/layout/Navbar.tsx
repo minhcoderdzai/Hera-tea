@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -19,6 +18,7 @@ import {
   DropdownMenuSeparator
 } from "@/components/ui/dropdown-menu";
 import CartDrawer from "../cart/CartDrawer";
+import ProductSearch from "../products/ProductSearch";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
