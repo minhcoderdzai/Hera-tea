@@ -78,14 +78,16 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
         
         <SheetFooter className="border-t border-border pt-4 flex flex-col mt-auto">
           {cartItems.length > 0 && (
-            <div className="flex justify-between mb-4 w-full px-1">
-              <span className="text-base font-medium whitespace-nowrap mr-2">Tổng cộng:</span>
-              <span className="text-base font-medium text-tea-dark whitespace-nowrap">
-                {new Intl.NumberFormat("vi-VN", {
-                  style: "currency",
-                  currency: "VND",
-                }).format(totalPrice)}
-              </span>
+            <div className="flex flex-col mb-4 w-full px-1 space-y-1">
+              <div className="flex items-center justify-between">
+                <span className="text-base font-medium">Tổng cộng:</span>
+                <span className="text-base font-medium text-tea-dark">
+                  {new Intl.NumberFormat("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  }).format(totalPrice)}
+                </span>
+              </div>
             </div>
           )}
           
